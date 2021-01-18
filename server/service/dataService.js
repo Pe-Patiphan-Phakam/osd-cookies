@@ -45,4 +45,17 @@ module.exports = {
       })
     })
   },
+  updateOne: (updateId, access) => {
+    console.log(updateId._id)
+    console.log(access)
+    return new Promise((resolve, reject) => {
+      ModelData.updateOne({ _id: updateId._id }, { access: access.access }, function(err,doc) {
+        if (err) return reject(err)
+        if (doc) {
+          console.log(doc)
+        }
+        resolve(doc)
+      })
+    })
+  },
 }
