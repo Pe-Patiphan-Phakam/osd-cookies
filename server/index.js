@@ -38,6 +38,7 @@ app.use(cors());
 app.use("/cookies/api/data", require("./api/data"))
 app.use("/cookies/api/users",require("./api/users"))
 app.use("/cookies/api/agree", require("./api/agree"))
+app.use("/cookies/api/getmac", require("./api/getmac"))
 
 
 
