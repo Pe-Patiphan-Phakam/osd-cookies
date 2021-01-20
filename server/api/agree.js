@@ -25,10 +25,14 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
+  console.log(req.params.id)
   const id = req.params.id
   agreeService
     .findByid(id)
-    .then((data) => res.send(data))
+    .then((data) => {
+      console.log(data) 
+      res.json(data)
+    })
     .catch((err) => {
       console.log(err)
       res.status(500).send(err)
