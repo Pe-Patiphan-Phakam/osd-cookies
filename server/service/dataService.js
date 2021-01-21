@@ -58,4 +58,28 @@ module.exports = {
       })
     })
   },
+  findSearch: (cookieId, date) => {
+    // var Total = "";
+    // if(cookieId != ""){
+    //   Total += "cookieId: '"+cookieId+"'";
+    // }
+    // if(IP != ""){
+    //   Total += "data[0].ipAdress: '"+IP+"',";
+    // }
+    return new Promise((resolve, reject) => {
+      ModelData.find({
+        cookieId: cookieId,
+        createdAt: {
+          '$gte': (""+date+"T00:00:00.000Z"),
+          '$lt': (""+date+"T23:59:59.590Z")
+        }
+      }, (err, doc) => {
+        if (err) return reject(err)
+        if (doc) {
+          console.log(doc)
+        }
+        resolve(doc)
+      })
+    })
+  },
 }

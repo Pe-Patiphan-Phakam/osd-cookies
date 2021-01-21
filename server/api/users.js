@@ -30,6 +30,7 @@ router.get("/", (req, res) => {
 })
 
 router.post("/checklogin", (req, res) => {
+  console.log(req.body)
   const username = req.body.username
   const password = req.body.password
   userService

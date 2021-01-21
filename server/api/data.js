@@ -15,9 +15,29 @@ router.post("/",(req, res) => {
 })
 
 router.get("/", (req, res) => {
+  console.log(req.params)
   dataService
     .findAll()
-    .then((data) => res.json(data))
+    .then((data) =>{ 
+      res.json(data)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+})
+
+router.post("/search", (req, res) => {
+  console.log(req.body)
+  const cookieId = req.body.cookieid
+  const date = req.body.date
+  const IP = req.body.ip
+  dataService
+    .findSearch(cookieId, date,IP)
+    .then((data) => {
+      console.log(data)
+      res.json(data)
+    })
     .catch((err) => {
       console.log(err)
       res.status(500).send(err)
@@ -25,6 +45,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
+  console.log(req.params)
   const id = req.params.id
   dataService
     .findByid(id)
