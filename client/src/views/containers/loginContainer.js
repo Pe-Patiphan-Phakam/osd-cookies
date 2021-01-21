@@ -52,7 +52,7 @@ export default function LoginContainer({ _login, _input, loading}) {
 
     }
     axios ({
-      url: 'http://localhost:5000/backend/api/users/checklogin',
+      url: 'http://127.0.0.1:5000/cookies/api/users/checklogin',
       method: 'POST',
       data: form
     })
