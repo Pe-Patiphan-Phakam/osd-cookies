@@ -28,12 +28,19 @@ router.get("/", (req, res) => {
 })
 
 router.post("/search", (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   const cookieId = req.body.cookieid
   const date = req.body.date
-  const IP = req.body.ip
+  const Ip = req.body.ip
+  var value = {
+    cookieId: req.body.cookieid,
+    date: req.body.date,
+    Ip: req.body.ip,
+    type: req.body.type,
+    browser: req.body.browser
+  }
   dataService
-    .findSearch(cookieId, date,IP)
+    .findSearch(value)
     .then((data) => {
       console.log(data)
       res.json(data)
