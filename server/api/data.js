@@ -28,10 +28,6 @@ router.get("/", (req, res) => {
 })
 
 router.post("/search", (req, res) => {
-  // console.log(req.body)
-  const cookieId = req.body.cookieid
-  const date = req.body.date
-  const Ip = req.body.ip
   var value = {
     cookieId: req.body.cookieid,
     date: req.body.date,

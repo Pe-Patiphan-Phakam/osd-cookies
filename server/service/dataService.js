@@ -59,29 +59,82 @@ module.exports = {
     })
   },
   findSearch: (value) => {
+    // console.log(value)
     var arrTotal = [];
     var cookieId = value.cookieId;
     var createdAt = {
       '$gte': ""+value.date+"T00:00:00.000Z",
       '$lt': ""+value.date+"T23:59:59.590Z"
     }
-    // if (value.cookieId != "" && value.date != "" && value.data != "") {
-    //   arrTotal.push({cookieId,createdAt})
-    if (value.cookieId != "" && value.date != "") {
-      arrTotal.push({cookieId,createdAt})
+    
+    if (value.cookieId != "" && value.date != "" && value.Ip != "" && value.type != "" && value.browser != "") {
+      arrTotal.push({cookieId, createdAt, "data.ipAdress": value.Ip, "data.diviceType": value.type, "data.browser": value.browser})
+
+    } else if (value.date != "" && value.Ip != "" && value.type != "" && value.browser != "") {
+      arrTotal.push({createdAt, "data.ipAdress": value.Ip, "data.diviceType": value.type, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.Ip != "" && value.type != "" && value.browser != "") {
+      arrTotal.push({cookieId, "data.ipAdress": value.Ip, "data.diviceType": value.type, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.date != "" && value.type != "" && value.browser != "") {
+      arrTotal.push({cookieId, createdAt, "data.diviceType": value.type, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.date != "" && value.Ip != "" && value.browser != "") {
+      arrTotal.push({cookieId, createdAt, "data.ipAdress": value.Ip, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.date != "" && value.Ip != "" && value.type != "") {
+      arrTotal.push({cookieId, createdAt, "data.ipAdress": value.Ip, "data.diviceType": value.type})
+
+    } else if (value.Ip != "" && value.type != "" && value.browser != "") {
+      arrTotal.push({"data.ipAdress": value.Ip, "data.diviceType": value.type, "data.browser": value.browser})
+    } else if (value.date != "" && value.type != "" && value.browser != "") {
+      arrTotal.push({createdAt, "data.diviceType": value.type, "data.browser": value.browser})
+    } else if (value.date != "" && value.Ip != "" && value.browser != "") {
+      arrTotal.push({createdAt, "data.ipAdress": value.Ip, "data.browser": value.browser})
+    } else if (value.date != "" && value.Ip != "" && value.type != "") {
+      arrTotal.push({createdAt, "data.ipAdress": value.Ip, "data.diviceType": value.type})
+    } else if (value.cookieId != "" && value.type != "" && value.browser != "") {
+      arrTotal.push({cookieId, "data.diviceType": value.type, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.Ip != "" && value.browser != "") {
+      arrTotal.push({cookieId, "data.ipAdress": value.Ip,  "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.Ip != "" && value.type != "") {
+      arrTotal.push({cookieId, "data.ipAdress": value.Ip, "data.diviceType": value.type})
+    } else if (value.cookieId != "" && value.date != "" && value.browser != "") {
+      arrTotal.push({cookieId, createdAt, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.date != "" && value.type != "") {
+      arrTotal.push({cookieId, createdAt, "data.diviceType": value.type})
+    } else if (value.cookieId != "" && value.date != "" && value.Ip != "") {
+      arrTotal.push({cookieId, createdAt, "data.ipAdress": value.Ip})
+
+    } else if (value.type != "" && value.browser != "") {
+      arrTotal.push({"data.diviceType": value.type, "data.browser": value.browser})
+    } else if (value.Ip != "" && value.browser != "") {
+      arrTotal.push({"data.ipAdress": value.Ip, "data.browser": value.browser})
+    } else if (value.Ip != "" && value.type != "") {
+      arrTotal.push({"data.ipAdress": value.Ip, "data.diviceType": value.type})
+    } else if (value.date != "" && value.Ip != "") {
+      arrTotal.push({createdAt, "data.ipAdress": value.Ip})
+    } else if (value.cookieId != "" && value.browser != "") {
+      arrTotal.push({cookieId, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.type != "") {
+      arrTotal.push({cookieId, "data.diviceType": value.type})
+    } else if (value.cookieId != "" && value.Ip != "") {
+      arrTotal.push({cookieId, "data.ipAdress": value.Ip})
+    } else if (value.date != "" && value.browser != "") {
+      arrTotal.push({createdAt, "data.browser": value.browser})
+    } else if (value.cookieId != "" && value.date != "") {
+      arrTotal.push({cookieId, createdAt})
+    } else if (value.date != "" && value.type != "") {
+      arrTotal.push({createdAt, "data.diviceType": value.type})
+
     } else if (value.cookieId != "") {
       arrTotal.push({cookieId})
     } else if (value.date != "") {
       arrTotal.push({createdAt})
+    } else if (value.Ip != "") {
+      arrTotal.push({"data.ipAdress": value.Ip})
+    } else if (value.type != "") {
+      arrTotal.push({"data.diviceType": value.type})
+    } else if (value.browser != "") {
+      arrTotal.push({"data.browser": value.browser})
     }
     console.log(arrTotal[0])
-    // var test = {
-    //   'cookieId': value.cookieId,
-    //     'createdAt': {
-    //       '$gte': ""+value.date+"T00:00:00.000Z",
-    //       '$lt': ""+value.date+"T23:59:59.590Z"
-    //     }
-    // }
     return new Promise((resolve, reject) => {
       ModelData.find(
         arrTotal[0]
